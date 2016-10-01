@@ -128,20 +128,74 @@ function cardRank(hand, pairs) {
     }
   return result;
 }
-
+function score(hand, pairs) {
+  var Score ;
+  if (flush(hand) && straight(hand)  && (hand[4].weight === 14) && (hand[3].weight === 13)) {
+      Score = 1000
+  } else if (flush(hand) && straight(hand) && (hand[3].weight !== 13)) {
+          Score = 900
+      } else if (flush(hand) && straight(hand)) {
+          Score = 900
+  } else if  ((pairs[0] === pairs[1]) && (pairs[1] === pairs[2]) && (pairs[1] !== undefined)) {
+      Score = 800
+  } else if (((pairs[0] !== pairs[1]) && (pairs[2] !== undefined) && (pairs[1] === pairs[2])) ||
+             ((pairs[1] !== pairs[2]) && (pairs[2] !== undefined) && (pairs[0] === pairs[1]))) {
+        if (pairs[0] === pairs[1]) {
+        Score = 700
+      } else if (pairs[1] === pairs[2]) {
+        Score = 700
+      }
+  } else if  (flush(hand)) {
+       Score = 600
+  } else if (straight(hand) && hand[4].weight === 14 && hand[3].weight !== 13) {
+       Score = 500
+      } else if (straight(hand)) {
+       Score = 400
+  } else if  (pairs[0] === pairs[1] && pairs[1] !== undefined) {
+       Score = 300
+  } else if  (pairs.length === 2) {
+       Score = 200 + pairs[0] + pairs[1];
+  } else if  (pairs.length === 1) {
+       Score = 100 + pairs[0];
+  } else if  (pairs.length === 0) {
+       Score = hand[4].weight;
+  }
+return Score;
+}
 
 var deckTest = new Deck();
 deckTest.createDeck();
+//build 1st hand
 var handTest = deckTest.buildHand();
 var tableTest = deckTest.buildTable();
 var trick = handTest.concat(tableTest);
+// build 2nd hand
+var hand2 = deckTest.buildHand();
+var table2 = deckTest.buildTable();
+var trick2 = hand2.concat(table2);
 //console.log (trick);
 trick.sort(compare);
+trick2.sort(compare);
 var freq = pairCounter(trick);
+var freq2 = pairCounter(trick2);
 var final = cardRank(trick, freq.pairs);
+var final2= cardRank(trick2, freq2.pairs);
+var score1 = score(trick, freq.pairs);
+var score2 = score(trick2,freq2.pairs);
 //console.log(final);
+
+if (score1 > score2) {
+  var winner = "You";
+} else if (score1 == score2 ) {
+  winner = "It's a tie";
+} else {
+  winner = "Opponent";
+}
 
 export {
   trick,
   final,
+  trick2,
+  final2,
+  winner,
 };
