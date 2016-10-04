@@ -4,15 +4,41 @@ function Deck() {
     this.buildHand = buildHand;
     this.buildTable = buildTable;
  }
+var SUITS = {
+  club: {
+    name: 'club',
+    symbol: '♣',
+    color: 'black', },
+  diamond: {
+    name: 'diamond',
+    symbol: '♦',
+    color: 'red', },
+  spade: {
+    name: 'spade',
+    symbol: '♠',
+    color: 'black', },
+  heart: {
+    name: 'heart',
+    symbol: '♥',
+    color: 'red',},
+  }
+var suit = [
+      SUITS.club.symbol,
+      SUITS.diamond.symbol,
+      SUITS.spade.symbol,
+      SUITS.heart.symbol,
+    ]
+
+
 var Card = function (rank, suit, weight) {
     this.rank = rank;
     this.suit = suit;
     this.weight = weight;
  };
 function createDeck() {
-    let rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-    let suit = ["♣" , "♥", "♠", "♦"];
-    let weight = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+    var rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+    suit = [SUITS.club.symbol, SUITS.diamond.symbol, SUITS.spade.symbol, SUITS.heart.symbol];
+    var weight = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
     this.deck = [];
     for (var i = 0; i < suit.length; i++ ) {
       for (var j = 0; j < rank.length; j++) {
@@ -20,6 +46,8 @@ function createDeck() {
       }
     }
  }
+
+
 function drawCard () {
     if (this.deck.length > 0) {
       var myCard = this.deck[Math.floor(Math.random()*this.deck.length)];
@@ -61,15 +89,19 @@ function compare(a,b) {
 }
 function pairCounter(hand) {
   var pairs = [];
+  var pairscore = [];
   console.log(hand[0].rank, hand[1].rank, hand[2].rank, hand[3].rank, hand[4].rank);
   console.log(hand[0].suit, hand[1].suit, hand[2].suit, hand[3].suit, hand[4].suit);
   //console.log(hand[0].weight, hand[1].weight, hand[2].weight, hand[3].weight, hand[4].weight);
   for (var i=0; i < (hand.length-1); i++) {
       if (hand[i].rank === hand[i+1].rank) {
         pairs.push(hand[i].rank);
+        pairscore.push(hand[i].weight);
       }
   }
-  return  {pairs : pairs};
+  return  { pairs : pairs,
+            pairscore : pairscore
+          };
 }
 function flush(array) {
     for(var i = 0; i < array.length - 1; i++) {
@@ -128,37 +160,37 @@ function cardRank(hand, pairs) {
     }
   return result;
 }
-function score(hand, pairs) {
+function score(hand, pairs, pairscore) {
   var Score ;
   if (flush(hand) && straight(hand)  && (hand[4].weight === 14) && (hand[3].weight === 13)) {
-      Score = 1000
+      Score = 100000
   } else if (flush(hand) && straight(hand) && (hand[3].weight !== 13)) {
-          Score = 900
+          Score = 900000 + hand[4].weight;
       } else if (flush(hand) && straight(hand)) {
-          Score = 900
+          Score = 900000 + 14*hand[4].weight;
   } else if  ((pairs[0] === pairs[1]) && (pairs[1] === pairs[2]) && (pairs[1] !== undefined)) {
-      Score = 800
+      Score = 80000 + 14*pairscore[2] + hand[4].weight;
   } else if (((pairs[0] !== pairs[1]) && (pairs[2] !== undefined) && (pairs[1] === pairs[2])) ||
              ((pairs[1] !== pairs[2]) && (pairs[2] !== undefined) && (pairs[0] === pairs[1]))) {
         if (pairs[0] === pairs[1]) {
-        Score = 700
+        Score = 700000 + 14*pairscore[0] + pairscore[2];
       } else if (pairs[1] === pairs[2]) {
-        Score = 700
+        Score = 700000 + 14*pairscore[2] + pairscore[0];
       }
   } else if  (flush(hand)) {
-       Score = 600
+       Score = 600000 + 196*hand[4].weight + 14*hand[3].weight + hand[2].weight;
   } else if (straight(hand) && hand[4].weight === 14 && hand[3].weight !== 13) {
-       Score = 500
+       Score = 500000 + hand[3].weight;
       } else if (straight(hand)) {
-       Score = 400
+       Score = 400000 + hand[4].weight;
   } else if  (pairs[0] === pairs[1] && pairs[1] !== undefined) {
-       Score = 300
+       Score = 300000 + 14*pairscore[1] + hand[4].weight ;
   } else if  (pairs.length === 2) {
-       Score = 200 + pairs[0] + pairs[1];
+       Score = 200000 + 196*pairscore[1] + 14*pairscore[0] + hand[4].weight;
   } else if  (pairs.length === 1) {
-       Score = 100 + pairs[0];
+       Score =  100000 + 14*pairscore[0] + hand[4].weight ;
   } else if  (pairs.length === 0) {
-       Score = hand[4].weight;
+       Score = 196*hand[4].weight + 14*hand[3].weight + hand[2].weight ;
   }
 return Score;
 }
@@ -180,13 +212,13 @@ var freq = pairCounter(trick);
 var freq2 = pairCounter(trick2);
 var final = cardRank(trick, freq.pairs);
 var final2= cardRank(trick2, freq2.pairs);
-var score1 = score(trick, freq.pairs);
-var score2 = score(trick2,freq2.pairs);
+var score1 = score(trick, freq.pairs, freq.pairscore);
+var score2 = score(trick2,freq2.pairs, freq2.pairscore);
 //console.log(final);
 
 if (score1 > score2) {
   var winner = "You";
-} else if (score1 == score2 ) {
+} else if (score1 === score2 ) {
   winner = "It's a tie";
 } else {
   winner = "Opponent";
@@ -198,4 +230,6 @@ export {
   trick2,
   final2,
   winner,
+  score1,
+  score2,
 };

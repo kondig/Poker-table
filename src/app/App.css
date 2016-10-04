@@ -1,22 +1,37 @@
 .App {
   text-align: center;
+  margin:0px;
+  background: #000;
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 60px;
+}
+.header-content {
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  z-index:1;
 }
 
 .App-header {
   background-color: black;
-  height: 150px;
-  padding: 20px;
+  border: 1px solid white;
+  height: 170px;
+  margin: 0px auto;
   color: white;
+  padding: 20px;
 }
 
+.Content {
+  width: 1000px;
+  border: 1px solid #ccc;
+  height: 1200px;
+  margin: 220px auto;
+  padding: 20px;
+}
 .App-intro {
-  color: red;
-  font-style: italic;
 }
 .App-footer {
   background-color: black;
@@ -26,47 +41,80 @@
   color: white;
 }
 .Hand-dealt {
-  display: inline-block;
 
 }
+.Hand-opponent {
+
+}
+
 img {
   height: 100px;
 }
+h2 {
+  color: #cc0000;
+}
 h3 {
-  color: black;
+  color: white;
 }
 h4 {
-  color: black;
+  color: white;
   font-size: 20px;
 }
 h5 {
   color: white;
 }
+h7 {
+  display: inline-block;
+  font-size: 40px;
+  height: 1.9em;
+  width: 5.8em;
+  color:transparent;
+  background-image: url('./images/evalbutton.jpg');
+  background-size: contain;
+  cursor: pointer;
+}
+.button {
+  background-color: black;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  border: 1px solid black;
+}
+.opponent-button {
+  color: red;
+}
 
 .Table {
-  border: 1px solid black;
+  border: 1px solid white;
   margin: 10px;
+  background-image: url(http://www.colourfulfelt.co.uk/media/catalog/product/b/a/baize-square.jpg);
 }
 .Table p {
-  color: red;
+  color: #cc0000;
   font-size: 25px;
+  text-decoration: underline;
 }
 .Result {
-  border: 1px solid black;
+  border: 1px solid white;
   margin: 10px;
   height: 150px;
+  color: white;
 }
 .Result p {
   font-size: 20px;
+  color: white;
 }
 .Winner {
-  border: 1px solid black;
+  border: 1px solid white;
   margin: 10px;
   height: 120px;
+  color: white;
 }
 .Winner p {
   font-size: 20px;
 }
+
+
+
 
 
 
