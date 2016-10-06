@@ -4,7 +4,7 @@ function Deck() {
     this.buildHand = buildHand;
     this.buildTable = buildTable;
  }
-var SUITS = {
+const SUITS = {
   club: {
     name: 'club',
     symbol: '♣',
@@ -22,12 +22,7 @@ var SUITS = {
     symbol: '♥',
     color: 'red',},
   }
-var suit = [
-      SUITS.club.symbol,
-      SUITS.diamond.symbol,
-      SUITS.spade.symbol,
-      SUITS.heart.symbol,
-    ]
+
 
 
 var Card = function (rank, suit, weight) {
@@ -36,9 +31,9 @@ var Card = function (rank, suit, weight) {
     this.weight = weight;
  };
 function createDeck() {
-    var rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-    suit = [SUITS.club.symbol, SUITS.diamond.symbol, SUITS.spade.symbol, SUITS.heart.symbol];
-    var weight = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+    const rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+    const weight = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+    const suit = [SUITS.club.name, SUITS.diamond.name, SUITS.spade.name, SUITS.heart.name];
     this.deck = [];
     for (var i = 0; i < suit.length; i++ ) {
       for (var j = 0; j < rank.length; j++) {

@@ -20,10 +20,12 @@ import {
   CPerson,
 } from '../components';
 
+
+
 const Hand = ({ trick }) => (
   <div className="Hand">
     {trick.map((card) => (
-      <Card rank={card.rank} suit={card.suit} />
+      <Card rank={card.rank} suit={card.suit} onClick={0} />
     ))}
     </div>
 );
@@ -54,17 +56,12 @@ class EvalButton extends Component {
       evaluated: false,
       result: false,
     };
-    //this._handleClick = this._handleClick.bind(this);
     this._handleResult = this._handleResult.bind(this);
   }
-  //_handleClick () {
-  //  this.setState ({evaluated: !this.state.evaluated});
-  //}
   _handleResult () {
     this.setState ({result: !this.state.result})
   }
   render() {
-    //const text = this.state.evaluated ? 'EVALUATED' : 'EVALUATE';
     const text2 = this.state.result ? <Result final={final} final2={final2} winner={winner}/>  :  <h7> 'EVALUATE' </h7>  ;
     return (
         <div className="evalButton" onClick={this._handleResult} > {text2} </div>
@@ -83,35 +80,23 @@ class OpponentHand  extends Component {
 _handleHand() {
   this.setState ({flipped: !this.state.flipped})
 }
-
 render() {
-  const text3 = this.state.flipped ? 'front' : 'back';
+  const text3 = this.state.flipped ? 'Card-front' : 'Card-back';
   return(
   <div className="opponent-button" onClick={this._handleHand} > {text3} </div>
 
   );}
 }
-var Box = React.createClass({
-  getInitialState: function() {
-    return {windowWidth: window.innerWidth};
-  },
 
-  handleResize: function(e) {
-    this.setState({windowWidth: window.innerWidth});
-  },
 
-  componentDidMount: function() {
-    window.addEventListener('resize', this.handleResize);
-  },
-
-  componentWillUnmount: function() {
-    window.removeEventListener('resize', this.handleResize);
-  },
-
-  render: function() {
-    return <div>Current window width: {this.state.windowWidth}</div>;
-  }
-});
+function FancyCheckbox(props) {
+  var checked = props.checked ? 'FancyChecked' : 'FancyUnchecked';
+  return (
+    <div className={checked} onClick={props.onClick}>
+      {props.children}
+    </div>
+  );
+}
 
 
 class App extends Component {
@@ -130,12 +115,14 @@ class App extends Component {
         <div className="Content">
           <div className="Table">
             <p> You </p>
-            <Hand className="Hand-dealt" trick={trick} />
+            <Hand className="Hand-dealt" trick={trick}  />
             <p> Opponent </p>
-            <Hand className="Hand-opponent" trick={trick2} />
+            <Hand className="Hand-opponent" trick={trick2}  onClick={0} />
             <OpponentHand className="flip-em" type="button"  />
-            <Box />
             <br/> <br/>
+            <FancyCheckbox checked={false} onClick={this._flipCard}> HELLO! </FancyCheckbox>
+            <br/> <br/>
+            <button onClick={this._flipCard}> flip me </button>
           </div>
           <div className="button">
             <EvalButton type="button" id="eval" />
@@ -148,7 +135,18 @@ class App extends Component {
       </div>
     );
   }
-
+  _flipCard(event) {
+      //event.currentTarget.style.position='absolute';
+      event.currentTarget.style.fontSize='30px';
+      //event.currentTarget.style.top='0';
+      //event.currentTarget.style.left='0';
+      event.currentTarget.style.width='100%';
+      //event.currentTarget.style.height='100%';
+      event.currentTarget.style.backfaceVisibility='hidden';
+      event.currentTarget.style.transition='transform 3s';
+      event.currentTarget.style.transform="rotateY(180deg)"
+      //event.currentTarget.style.zIndex='2';
+  }
 }
 
 export default App;
