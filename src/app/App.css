@@ -71,12 +71,16 @@ h7 {
   background-image: url('./images/evalbutton.jpg');
   background-size: contain;
   cursor: pointer;
+  box-shadow: 0 4px #999;
+  border-radius: 15px;
+}
+h7:active {
+  background-color: #3e8e41;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
 }
 .button {
-  background-color: black;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-  border: 1px solid black;
+
 }
 .opponent-button {
   color: red;

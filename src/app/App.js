@@ -25,13 +25,10 @@ import {
 const Hand = ({ trick }) => (
   <div className="Hand">
     {trick.map((card) => (
-      <Card rank={card.rank} suit={card.suit} onClick={0} />
+      <Card rank={card.rank} suit={card.suit} key={`${card.rank} ${card.suit}`} />
     ))}
     </div>
 );
-
-
-
 
 const Result = ({final, final2, winner}) => (
 <div className="evaluation">
@@ -62,7 +59,7 @@ class EvalButton extends Component {
     this.setState ({result: !this.state.result})
   }
   render() {
-    const text2 = this.state.result ? <Result final={final} final2={final2} winner={winner}/>  :  <h7> 'EVALUATE' </h7>  ;
+    const text2 = this.state.result ? <Result final={final} final2={final2} winner={winner}/>  :  <h7>  </h7>  ;
     return (
         <div className="evalButton" onClick={this._handleResult} > {text2} </div>
     );
@@ -100,7 +97,12 @@ function FancyCheckbox(props) {
 
 
 class App extends Component {
-
+  constructor() {
+    super();
+    this.state = {
+      back: true,
+    };
+  }
   render() {
     return (
       <div className="App">
@@ -115,17 +117,19 @@ class App extends Component {
         <div className="Content">
           <div className="Table">
             <p> You </p>
-            <Hand className="Hand-dealt" trick={trick}  />
+            <Hand className="Hand-dealt" trick={trick} key={trick.id} />
             <p> Opponent </p>
-            <Hand className="Hand-opponent" trick={trick2}  onClick={0} />
+            <Hand className="Hand-opponent" trick={trick2} key={trick2.id} onLoad={this._oppToggle.bind(this)} onClick={0} />
+            <br/> <br/>
             <OpponentHand className="flip-em" type="button"  />
             <br/> <br/>
-            <FancyCheckbox checked={false} onClick={this._flipCard}> HELLO! </FancyCheckbox>
+            <FancyCheckbox onClick={this._oppToggle.bind(this)} > HELLO! </FancyCheckbox>
             <br/> <br/>
-            <button onClick={this._flipCard}> flip me </button>
+            <button onClick={this._oppToggle.bind(this)} > flip me </button>
+            <br/> <br/>
           </div>
           <div className="button">
-            <EvalButton type="button" id="eval" />
+            <EvalButton type="button" id="eval" key={EvalButton.id} />
           </div>
         </div>
         <div className="App-footer">
@@ -135,18 +139,22 @@ class App extends Component {
       </div>
     );
   }
-  _flipCard(event) {
-      //event.currentTarget.style.position='absolute';
-      event.currentTarget.style.fontSize='30px';
-      //event.currentTarget.style.top='0';
-      //event.currentTarget.style.left='0';
-      event.currentTarget.style.width='100%';
-      //event.currentTarget.style.height='100%';
-      event.currentTarget.style.backfaceVisibility='hidden';
-      event.currentTarget.style.transition='transform 3s';
-      event.currentTarget.style.transform="rotateY(180deg)"
-      //event.currentTarget.style.zIndex='2';
-  }
+  _oppToggle(event) {
+      if (this.state.back) {
+        event.currentTarget.style.fontSize='60px';
+        event.currentTarget.style.transition='transform 1s';
+        event.currentTarget.style.transform="rotateY(180deg)";
+        this.setState({back:false});
+      }
+      else {
+        event.currentTarget.style.fontSize='20px';
+        event.currentTarget.style.transition='transform 1s';
+        event.currentTarget.style.transform="rotateY(0deg)";
+        this.setState({back:true});
+      }
+    }
+
 }
+
 
 export default App;

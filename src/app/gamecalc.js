@@ -23,8 +23,6 @@ const SUITS = {
     color: 'red',},
   }
 
-
-
 var Card = function (rank, suit, weight) {
     this.rank = rank;
     this.suit = suit;
@@ -41,8 +39,6 @@ function createDeck() {
       }
     }
  }
-
-
 function drawCard () {
     if (this.deck.length > 0) {
       var myCard = this.deck[Math.floor(Math.random()*this.deck.length)];
@@ -192,7 +188,7 @@ return Score;
 
 var deckTest = new Deck();
 deckTest.createDeck();
-//build 1st hand
+// build 1st hand
 var handTest = deckTest.buildHand();
 var tableTest = deckTest.buildTable();
 var trick = handTest.concat(tableTest);

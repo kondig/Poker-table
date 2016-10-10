@@ -8,18 +8,12 @@ const Card = ({rank,suit}) =>  {
     var mycard = event.currentTarget;
     if (front) {
         front = false;
-        //mycard.style.fontSize='50px';
-        //mycard.style.backfaceVisibility='hidden';
-        //mycard.style.transformStyle='preserve-3d';
         mycard.style.transition='transform 1s';
         mycard.style.transform="rotateY(-180deg)";
         mycard.style.cursor="pointer";
     }
     else {
         front = true;
-        //mycard.style.fontSize='50px';
-        //mycard.style.backfaceVisibility='hidden';
-        //mycard.style.transformStyle='preserve-3d';
         mycard.style.transition='transform 1s';
         mycard.style.transform="rotateY(0deg)";
         mycard.style.cursor="pointer";
