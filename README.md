@@ -1,2 +1,2 @@
-Poker App
-powererd by KonDig
+(draft) Poker app
+powered by KonDig
