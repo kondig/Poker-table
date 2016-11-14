@@ -3,12 +3,12 @@
   display: inline-block;
 }
 .Card:hover {
-  cursor: pointer
+  /*cursor: grab;
+  /*transform: rotateY(180deg); */
 }
+.Card:active {
 
-/*.playingCards:active .Card {
-  font-size: 3.5em;
-}*/
+}
 .Card {
     width: 3.0em;
     height: 4.5em;
@@ -28,7 +28,6 @@
     text-align: center;
     z-index: 2
 }
-
 .Card .Card-back {
     text-indent: -4000px;
     width: 3.0em;
@@ -55,8 +54,6 @@
 .Card-back {
    backface-visibility: hidden;
    transition: transform 0.3s;
-}
-.Card-front {
 }
 .Card-back {
   transform: rotateY(180deg);

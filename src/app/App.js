@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 import cardlogo from './images/cardlogo.png';
-
 import {
   trick,
   trick2,
@@ -12,20 +11,14 @@ import {
   winner,
 } from './gamecalc.js';
 
-import {
-  Card,
-} from '../components';
-
-import {
-  CPerson,
-} from '../components';
+import { Card } from '../components';
+import { CPerson } from '../components';
 
 
-
-const Hand = ({ trick }) => (
+const Hand = ({ trick, isOpponent }) => (
   <div className="Hand">
     {trick.map((card) => (
-      <Card rank={card.rank} suit={card.suit} key={`${card.rank} ${card.suit}`} />
+      <Card rank={card.rank} suit={card.suit} isOpponent={isOpponent} key={`${card.rank} ${card.suit}`}  />
     ))}
     </div>
 );
@@ -34,8 +27,8 @@ const Result = ({final, final2, winner}) => (
 <div className="evaluation">
   <div className="Result" >
     <h3> Hands on table: </h3>
-    <p> You: {final} </p>
     <p> Opponent: {final2} </p>
+    <p> You: {final} </p>
     <br/> <br/>
   </div>
   <div className="Winner">
@@ -59,50 +52,17 @@ class EvalButton extends Component {
     this.setState ({result: !this.state.result})
   }
   render() {
-    const text2 = this.state.result ? <Result final={final} final2={final2} winner={winner}/>  :  <h7>  </h7>  ;
+    const text = this.state.result ? <Result final={final} final2={final2} winner={winner}/>  :  <h7>  </h7>  ;
     return (
-        <div className="evalButton" onClick={this._handleResult} > {text2} </div>
+        <div className="evalButton" onClick={this._handleResult} > {text} </div>
     );
   }
 }
 
-class OpponentHand  extends Component {
-  constructor() {
-    super();
-    this.state = {
-      flipped: false,
-  };
-  this._handleHand = this._handleHand.bind(this);
-}
-_handleHand() {
-  this.setState ({flipped: !this.state.flipped})
-}
-render() {
-  const text3 = this.state.flipped ? 'Card-front' : 'Card-back';
-  return(
-  <div className="opponent-button" onClick={this._handleHand} > {text3} </div>
-
-  );}
-}
-
-
-function FancyCheckbox(props) {
-  var checked = props.checked ? 'FancyChecked' : 'FancyUnchecked';
-  return (
-    <div className={checked} onClick={props.onClick}>
-      {props.children}
-    </div>
-  );
-}
 
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      back: true,
-    };
-  }
+  
   render() {
     return (
       <div className="App">
@@ -116,17 +76,14 @@ class App extends Component {
         </div>
         <div className="Content">
           <div className="Table">
-            <p> You </p>
-            <Hand className="Hand-dealt" trick={trick} key={trick.id} />
             <p> Opponent </p>
-            <Hand className="Hand-opponent" trick={trick2} key={trick2.id} onLoad={this._oppToggle.bind(this)} onClick={0} />
+            <Hand isOpponent={true} className="Hand-opponent" trick={trick2} key={trick2.id} />
             <br/> <br/>
-            <OpponentHand className="flip-em" type="button"  />
+            <p> You </p>
+            <Hand isOppopnent={false} className="Hand-dealt" trick={trick} key={trick.id} />
             <br/> <br/>
-            <FancyCheckbox onClick={this._oppToggle.bind(this)} > HELLO! </FancyCheckbox>
-            <br/> <br/>
-            <button onClick={this._oppToggle.bind(this)} > flip me </button>
-            <br/> <br/>
+            <button type="button" onClick={0}> Deal next hand please! </button>
+            <br/> <br/> <br/>
           </div>
           <div className="button">
             <EvalButton type="button" id="eval" key={EvalButton.id} />
@@ -139,21 +96,6 @@ class App extends Component {
       </div>
     );
   }
-  _oppToggle(event) {
-      if (this.state.back) {
-        event.currentTarget.style.fontSize='60px';
-        event.currentTarget.style.transition='transform 1s';
-        event.currentTarget.style.transform="rotateY(180deg)";
-        this.setState({back:false});
-      }
-      else {
-        event.currentTarget.style.fontSize='20px';
-        event.currentTarget.style.transition='transform 1s';
-        event.currentTarget.style.transform="rotateY(0deg)";
-        this.setState({back:true});
-      }
-    }
-
 }
 
 
