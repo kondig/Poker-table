@@ -3,12 +3,12 @@
   display: inline-block;
 }
 .Card:hover {
-  /*cursor: grab;
-  /*transform: rotateY(180deg); */
+  cursor: grabbing;
 }
-.Card:active {
 
-}
+/*.playingCards:active .Card {
+  font-size: 3.5em;
+}*/
 .Card {
     width: 3.0em;
     height: 4.5em;
@@ -28,6 +28,7 @@
     text-align: center;
     z-index: 2
 }
+
 .Card .Card-back {
     text-indent: -4000px;
     width: 3.0em;
@@ -39,8 +40,7 @@
     background-color: black;
     background-repeat: repeat;
     background-image: url(https://s-media-cache-ak0.pinimg.com/236x/c1/59/b4/c159b4738dae9c9d8d6417228024de8d.jpg);
-    /*background-image: url('./card-back.jpg');) */
-    background-size: cover;
+    background-size: contain;
 }
 .Card-front,
 .Card-back {
@@ -55,16 +55,14 @@
    backface-visibility: hidden;
    transition: transform 0.3s;
 }
+.Card-front {
+}
 .Card-back {
   transform: rotateY(180deg);
 }
 .Suit {
   display: block;
   position: absolute;
-  /*left: 0.1em;*/
-}
-.Suit::after {
-
 }
 .heart,
 .diamond {
@@ -72,7 +70,6 @@
 }
 .heart::after {
   content: '♥';
-  text-align: center;
   visibility: visible;
   display: block;
   position: absolute;

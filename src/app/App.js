@@ -1,68 +1,25 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
+import { createStore } from 'redux';
+import { Hand } from '../components';
+import { table } from '../components';
+import { Eval } from '../components';
+
 import './App.css';
-
 import cardlogo from './images/cardlogo.png';
-import {
-  trick,
-  trick2,
-  final,
-  final2,
-  winner,
-} from './gamecalc.js';
-
-import { Card } from '../components';
 import { CPerson } from '../components';
+import { trick, trick2 } from './gamecalc.js';
 
-
-const Hand = ({ trick, isOpponent }) => (
-  <div className="Hand">
-    {trick.map((card) => (
-      <Card rank={card.rank} suit={card.suit} isOpponent={isOpponent} key={`${card.rank} ${card.suit}`}  />
-    ))}
-    </div>
-);
-
-const Result = ({final, final2, winner}) => (
-<div className="evaluation">
-  <div className="Result" >
-    <h3> Hands on table: </h3>
-    <p> Opponent: {final2} </p>
-    <p> You: {final} </p>
-    <br/> <br/>
-  </div>
-  <div className="Winner">
-    <h4> Winner: </h4>
-    <p> {winner} </p>
-    <br/>
-  </div>
-</div>
-);
-
-class EvalButton extends Component {
-  constructor() {
-    super();
-    this.state = {
-      evaluated: false,
-      result: false,
-    };
-    this._handleResult = this._handleResult.bind(this);
-  }
-  _handleResult () {
-    this.setState ({result: !this.state.result})
-  }
-  render() {
-    const text = this.state.result ? <Result final={final} final2={final2} winner={winner}/>  :  <h7>  </h7>  ;
-    return (
-        <div className="evalButton" onClick={this._handleResult} > {text} </div>
-    );
-  }
+const initial = {
+  hand1: trick2,
+  hand2: trick,
+  evalmenu: false
 }
+const store = createStore(table, initial);
 
 
 
 class App extends Component {
-  
+
   render() {
     return (
       <div className="App">
@@ -77,16 +34,16 @@ class App extends Component {
         <div className="Content">
           <div className="Table">
             <p> Opponent </p>
-            <Hand isOpponent={true} className="Hand-opponent" trick={trick2} key={trick2.id} />
+            <Hand isOpponent={true} className="Hand-opponent" trick={store.getState().hand1}  />
             <br/> <br/>
             <p> You </p>
-            <Hand isOppopnent={false} className="Hand-dealt" trick={trick} key={trick.id} />
+            <Hand isOppopnent={false} className="Hand-dealt" trick={store.getState().hand2}  />
             <br/> <br/>
             <button type="button" onClick={0}> Deal next hand please! </button>
             <br/> <br/> <br/>
           </div>
           <div className="button">
-            <EvalButton type="button" id="eval" key={EvalButton.id} />
+            <Eval type="button" id="eval" evalmenu={false}  />
           </div>
         </div>
         <div className="App-footer">
