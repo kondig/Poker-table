@@ -9,21 +9,56 @@ import {
 
 import {
   Hand,
-} from './card';
+} from './hand';
 
 import {
-  table,
+  tableMaker,
 } from './reducer';
 
 import {
   Eval,
 } from './eval';
 
+import {
+  PokerTable,
+} from './pokerTable';
+
+import {
+  trick,
+  final,
+  trick2,
+  final2,
+  winner,
+  score1,
+  score2,
+} from './gamecalc';
+
+import {
+  newTable,
+  winnerFinder
+} from './gamecalc'
+
 export {
   Deck,
   CPerson,
   Card,
   Hand,
-  table,
-  Eval
+  Eval,
 };
+export {
+  trick,
+  final,
+  trick2,
+  final2,
+  winner,
+  score1,
+  score2,
+};
+
+export {
+  newTable,
+  winnerFinder
+};
+
+export { tableMaker };
+export { PokerTable };

@@ -63,6 +63,12 @@ h5 {
   color: white;
 }
 h7 {
+
+}
+h7:active {
+
+}
+.evaluate {
   display: inline-block;
   font-size: 40px;
   height: 1.9em;
@@ -74,14 +80,29 @@ h7 {
   box-shadow: 0 4px #999;
   border-radius: 15px;
 }
-h7:active {
+.evaluate:active {
   background-color: #3e8e41;
   box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
-.button {
-
+.deal {
+  display: inline-block;
+  font-size: 40px;
+  height: 1.9em;
+  width: 5.8em;
+  color:transparent;
+  background-image: url('./images/dealbutton.jpg');
+  background-size: contain;
+  cursor: pointer;
+  box-shadow: 0 4px #999;
+  border-radius: 15px;
 }
+.deal:active {
+  background-color: #3e8e41;
+  box-shadow: 0 2px #666;
+  transform: translateY(4px);
+}
+
 .opponent-button {
   color: red;
 }

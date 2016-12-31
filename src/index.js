@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './app';
 import './index.css';
 
-import Provider from 'react-redux';
-import createStore from 'redux';
-import table from './components/reducer';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { tableMaker, initialState } from './components/reducer';
 
-let store = createStore(table);
+const store = createStore(tableMaker, initialState);
+console.log(store.getState());
 
 ReactDOM.render(
     <Provider store={store}>
@@ -15,3 +16,4 @@ ReactDOM.render(
     </Provider>,
   document.getElementById('root')
 );
+console.log(store.getState());
