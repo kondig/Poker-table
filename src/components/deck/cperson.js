@@ -11,7 +11,7 @@ class CPerson extends React.Component {
   }
   render () {
     return (
-      <div onClick={() => this.setState( {
+      <div className='firstcomponent' onClick={() => this.setState( {
         age: ++this.state.age,
       })}>
       {this.props.name} {this.state.age}

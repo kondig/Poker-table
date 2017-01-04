@@ -18,7 +18,7 @@ class App extends Component {
         <div className="header-content">
           <div className="App-header">
             <img src={cardlogo} className="App-logo" alt="logo" />
-            <h2>Poker table</h2>
+            <h2>POKER TABLE</h2>
             <CPerson name="kon" age={20} />
             <br/>
           </div>

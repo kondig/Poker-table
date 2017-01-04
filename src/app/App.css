@@ -25,9 +25,9 @@
 }
 
 .Content {
-  width: 1000px;
+  width: 1200px;
   border: 1px solid #ccc;
-  height: 1200px;
+  height: 1300px;
   margin: 220px auto;
   padding: 20px;
 }
@@ -102,6 +102,26 @@ h7:active {
   box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
+.showHand {
+  height: 4.9em;
+  width: 4.8em;
+  display: inline-block;
+  color: transparent;
+  background-image: url('./images/chip.jpg');
+  background-size: contain;
+  position: relative;
+  right: 400px;
+}
+.showMyHand {
+  height: 4.9em;
+  width: 4.8em;
+  display: inline-block;
+  color: transparent;
+  background-image: url('./images/chips.jpg');
+  background-size: contain;
+  position: relative;
+  right: 400px;
+}
 
 .opponent-button {
   color: red;
@@ -110,7 +130,7 @@ h7:active {
 .Table {
   border: 1px solid white;
   margin: 10px;
-  background-image: url(http://www.colourfulfelt.co.uk/media/catalog/product/b/a/baize-square.jpg);
+  background-image: url('./images/tsoxa.jpg');
 }
 .Table p {
   color: #cc0000;

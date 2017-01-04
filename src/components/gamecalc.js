@@ -85,8 +85,8 @@ function compare(a,b) {
 function pairCounter(hand) {
   var pairs = [];
   var pairscore = [];
-  console.log(hand[0].rank, hand[1].rank, hand[2].rank, hand[3].rank, hand[4].rank);
-  console.log(hand[0].suit, hand[1].suit, hand[2].suit, hand[3].suit, hand[4].suit);
+  //console.log(hand[0].rank, hand[1].rank, hand[2].rank, hand[3].rank, hand[4].rank);
+  //console.log(hand[0].suit, hand[1].suit, hand[2].suit, hand[3].suit, hand[4].suit);
   //console.log(hand[0].weight, hand[1].weight, hand[2].weight, hand[3].weight, hand[4].weight);
   for (var i=0; i < (hand.length-1); i++) {
       if (hand[i].rank === hand[i+1].rank) {

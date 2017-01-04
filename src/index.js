@@ -8,7 +8,9 @@ import { createStore } from 'redux';
 import { tableMaker, initialState } from './components/reducer';
 
 const store = createStore(tableMaker, initialState);
+console.log('Initial state: ')
 console.log(store.getState());
+console.log('-----------');
 
 ReactDOM.render(
     <Provider store={store}>
@@ -16,4 +18,3 @@ ReactDOM.render(
     </Provider>,
   document.getElementById('root')
 );
-console.log(store.getState());

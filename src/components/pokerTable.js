@@ -8,7 +8,7 @@ import { winnerFinder } from './gamecalc';
 
 
 let PokerTable = (props) => {
-  const { trick, trick2, evalmenu, isOpponent, isPlayer, dealHands, toggleEval } = props;
+  const { trick, trick2, evalmenu, isOpponent, isPlayer, dealHands, toggleEval, toggleHand, toggleMyHand } = props;
   let myeval = winnerFinder(trick, trick2);
   let final = myeval.youResult;
   let final2 = myeval.oppResult;
@@ -17,16 +17,18 @@ let PokerTable = (props) => {
     <div>
     <div className="Table">
       <p> Opponent </p>
-      <Hand trick={trick2} isOpponent={isOpponent}    />
+      <Hand trick={trick2} isOpponent={isOpponent}  />
+      <button className="showHand" onClick={()=> toggleHand()}> Opp </button>
       <br/> <br/>
-      <p> You</p>
-      <Hand trick={trick} isOpponent={isPlayer}    />
-      <br/> <br/>
-      <br/> <br/>
+      <p> You </p>
+      <Hand trick={trick} isOpponent={isPlayer}  />
+      <button className="showMyHand" onClick={()=> toggleMyHand()}> You </button>
+      <br/> <br/> <br/> <br/>
     </div>
     <div className="button"  >
-      <button className="evaluate" onClick={() => toggleEval()} > click me </button>
-      <button className="deal" onClick={() => dealHands()} > deal me </button>
+      <button className="evaluate" onClick={() => toggleEval()} > evaluate </button>
+      <br/>
+      <button className="deal" onClick={() => dealHands()} > deal again </button>
       <Eval evalmenu={evalmenu} youResult={final} oppResult={final2} winner={thiswinner}  />
     </div>
     </div>
@@ -53,7 +55,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dealHands: () => dispatch({type: 'DEAL_HANDS'}),
     toggleEval: () => dispatch({type: 'TOGGLE_EVAL'}),
-    cardClick: () => dispatch({type: 'SHOW_OPP'})
+    toggleHand: () => dispatch({type: 'SHOW_OPPONENT_HAND'}),
+    toggleMyHand: () => dispatch({type: 'SHOW_PLAYER_HAND'})
   };
 };
 
