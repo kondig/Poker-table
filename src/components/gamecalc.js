@@ -29,6 +29,7 @@ var Card = function (rank, suit, weight) {
     this.rank = rank;
     this.suit = suit;
     this.weight = weight;
+    this.selected = false;
  };
 function createDeck() {
     const rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
@@ -52,7 +53,8 @@ function drawCard () {
       return myCard;
     } else {
       console.log("no cards left")
-      return null;}
+      return null;
+    }
  }
 function buildHand() {
   var hand = [];
@@ -189,18 +191,17 @@ function score(hand, pairs, pairscore) {
   }
 return Score;
 }
-
-var deckTest = new Deck();
-deckTest.createDeck();
+// --- below calculations of initial state ----
+let myDeck = new Deck();
+myDeck.createDeck();
 //build 1st hand
-var handTest = deckTest.buildHand();
-var tableTest = deckTest.buildTable();
+var handTest = myDeck.buildHand();
+var tableTest = myDeck.buildTable();
 var trick = handTest.concat(tableTest);
 // build 2nd hand
-var hand2 = deckTest.buildHand();
-var table2 = deckTest.buildTable();
+var hand2 = myDeck.buildHand();
+var table2 = myDeck.buildTable();
 var trick2 = hand2.concat(table2);
-//console.log (trick);
 trick.sort(compare);
 trick2.sort(compare);
 var freq = pairCounter(trick);
@@ -209,7 +210,6 @@ var final = cardRank(trick, freq.pairs);
 var final2= cardRank(trick2, freq2.pairs);
 var score1 = score(trick, freq.pairs, freq.pairscore);
 var score2 = score(trick2,freq2.pairs, freq2.pairscore);
-//console.log(final);
 
 if (score1 > score2) {
   var winner = "You";
@@ -218,17 +218,17 @@ if (score1 > score2) {
 } else {
   winner = "Opponent";
 }
-
+// ----------------------------------------------
 function newTable () {
-  let myDeck = new Deck();
-  myDeck.createDeck();
-  let hand1 = myDeck.buildHand();
-  let hand2 = myDeck.buildHand();
-  let trickA = hand1.concat(myDeck.buildTable());
-  let trickB = hand2.concat(myDeck.buildTable());
+  let newDeck = new Deck();
+  newDeck.createDeck();
+  let hand1 = newDeck.buildHand();
+  let hand2 = newDeck.buildHand();
+  let trickA = hand1.concat(newDeck.buildTable());
+  let trickB = hand2.concat(newDeck.buildTable());
   trickA.sort(compare);
   trickB.sort(compare);
-  return {trickA, trickB};
+  return {trickA, trickB, newDeck};
 }
 function winnerFinder (hand1, hand2) {
   let pairs1 = pairCounter(hand1);
@@ -246,6 +246,11 @@ function winnerFinder (hand1, hand2) {
   };
   return {youResult, oppResult, newWinner};
 }
+function handBuilder (deck) {
+  let cardA = deck.drawCard();
+  let cardB = deck.drawCard();
+  return {cardA, cardB};
+}
 
 export {
   trick,
@@ -255,8 +260,10 @@ export {
   winner,
   score1,
   score2,
+  myDeck,
 };
 export {
   newTable,
-  winnerFinder
+  winnerFinder,
+  handBuilder
 };

@@ -8,7 +8,9 @@ import { winnerFinder } from './gamecalc';
 
 
 let PokerTable = (props) => {
-  const { trick, trick2, evalmenu, isOpponent, isPlayer, dealHands, toggleEval, toggleHand, toggleMyHand } = props;
+  const { trick, trick2, evalmenu, isOpponent, isPlayer,
+    dealHands, toggleEval, toggleHand, toggleMyHand,
+    changeCards } = props;
   let myeval = winnerFinder(trick, trick2);
   let final = myeval.youResult;
   let final2 = myeval.oppResult;
@@ -23,6 +25,8 @@ let PokerTable = (props) => {
       <p> You </p>
       <Hand trick={trick} isOpponent={isPlayer}  />
       <button className="showMyHand" onClick={()=> toggleMyHand()}> You </button>
+      <br/>
+      <button className="changeHand" onClick={()=> changeCards()}> Change em </button>
       <br/> <br/> <br/> <br/>
     </div>
     <div className="button"  >
@@ -56,7 +60,8 @@ const mapDispatchToProps = (dispatch) => {
     dealHands: () => dispatch({type: 'DEAL_HANDS'}),
     toggleEval: () => dispatch({type: 'TOGGLE_EVAL'}),
     toggleHand: () => dispatch({type: 'SHOW_OPPONENT_HAND'}),
-    toggleMyHand: () => dispatch({type: 'SHOW_PLAYER_HAND'})
+    toggleMyHand: () => dispatch({type: 'SHOW_PLAYER_HAND'}),
+    changeCards: () => dispatch({type: 'CHANGE_SELECTED'})
   };
 };
 

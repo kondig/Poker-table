@@ -31,6 +31,7 @@ import {
   winner,
   score1,
   score2,
+  myDeck
 } from './gamecalc';
 
 import {
@@ -53,6 +54,7 @@ export {
   winner,
   score1,
   score2,
+  myDeck
 };
 
 export {

@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 
 class Hand extends Component {
   render () {
-    const {trick, isOpponent, isPlayer, selected, cardClick} = this.props;
+    const {trick, isOpponent, isPlayer} = this.props;
     return (
       <div className="Hand">
-        {trick.map( ({rank, suit, weight}) => (
+        {trick.map( ({rank, suit, weight, selected}) => (
           <Card
             rank={rank}
             suit={suit}
@@ -16,7 +16,6 @@ class Hand extends Component {
             isOpponent={isOpponent}
             isPlayer={isPlayer}
             selected={selected}
-            onClick={() => cardClick(rank, suit, weight)}
             key={`${rank} ${suit}`}  />
          ))}
        </div>
@@ -24,26 +23,24 @@ class Hand extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  // console.log(state);
-  // console.log(ownProps);
-  return {
-    selected: state.selected
-  }
-}
+// const mapStateToProps = (state, ownProps) => {
+//
+//   return {
+//     cardsToSwap: state.cardsToSwap
+//   }
+// }
 
-const mapDispatchToProps = (dispatch ) => {
-  return {
-    cardClick: (rank, suit, weight) => {
-      dispatch({
-        type:'SELECT',
-        rank,
-        suit,
-        weight
-    })}
-  }
-}
+// const mapDispatchToProps = (dispatch ) => {
+//   return {
+//     cardClick: (rank, suit) => {
+//       dispatch({
+//         type:'SELECT',
+//         rank,
+//         suit,
+//     })}
+//   }
+// }
 
-Hand = connect (mapStateToProps, mapDispatchToProps)(Hand);
+Hand = connect ()(Hand);
 
 export { Hand }
