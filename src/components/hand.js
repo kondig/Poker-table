@@ -22,7 +22,6 @@ class Hand extends Component {
     )
   }
 }
-
 const mapStateToProps = (state) => {
   return {
     cardsToSwap: state.cardsToSwap

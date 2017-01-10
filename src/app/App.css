@@ -25,9 +25,9 @@
 }
 
 .Content {
-  width: 1200px;
+  width: 1600px;
   border: 1px solid #ccc;
-  height: 1350px;
+  height: 1550px;
   margin: 220px auto;
   padding: 20px;
 }
@@ -62,12 +62,7 @@ h4 {
 h5 {
   color: white;
 }
-h7 {
 
-}
-h7:active {
-
-}
 .evaluate {
   display: inline-block;
   font-size: 40px;
@@ -79,6 +74,7 @@ h7:active {
   cursor: pointer;
   box-shadow: 0 4px #999;
   border-radius: 15px;
+  outline: 0;
 }
 .evaluate:active {
   background-color: #3e8e41;
@@ -96,31 +92,43 @@ h7:active {
   cursor: pointer;
   box-shadow: 0 4px #999;
   border-radius: 15px;
+  outline: 0;
 }
 .deal:active {
   background-color: #3e8e41;
   box-shadow: 0 2px #666;
   transform: translateY(4px);
 }
-.showHand {
+.showOppHand {
   height: 4.9em;
   width: 4.8em;
   display: inline-block;
   color: transparent;
-  background-image: url('./images/chip.jpg');
+  background-image: url('./images/rotatebutton.jpg');
   background-size: contain;
   position: relative;
   right: 400px;
+  outline: 0;
 }
 .showMyHand {
   height: 4.9em;
   width: 4.8em;
   display: inline-block;
   color: transparent;
-  background-image: url('./images/chips.jpg');
+  background-image: url('./images/rotatebutton.jpg');
   background-size: contain;
   position: relative;
   right: 400px;
+  outline: 0;
+}
+.changeHand {
+  height: 5.0em;
+  width: 3.8em;
+  display: inline-block;
+  color: transparent;
+  background-image: url('./images/changepair.jpg');
+  background-size: contain;
+  outline: 0;
 }
 
 .opponent-button {
@@ -128,6 +136,7 @@ h7:active {
 }
 
 .Table {
+  height: 1050px;
   border: 1px solid white;
   margin: 10px;
   background-image: url('./images/tsoxa.jpg');

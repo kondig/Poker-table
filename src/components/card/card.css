@@ -2,13 +2,13 @@
   perspective: 1000px;
   display: inline-block;
 }
-/*.Card:hover {
+.Card:hover {
   cursor: grabbing;
-}*/
+}
+
 /*.playingCards:active .Card {
   font-size: 3.5em;
 }*/
-
 .Card {
     width: 3.0em;
     height: 4.5em;

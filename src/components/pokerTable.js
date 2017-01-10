@@ -20,18 +20,19 @@ let PokerTable = (props) => {
     <div className="Table">
       <p> Opponent </p>
       <Hand trick={trick2} isOpponent={isOpponent}  />
-      <button className="showHand" onClick={()=> toggleHand()}> Opp </button>
-      <br/> <br/>
+      <button className="showOppHand" onClick={()=> toggleHand()}> Opp </button>
+      <br/> <br/> <br/> <br/> <br/> <br/>
       <p> You </p>
       <Hand trick={trick} isOpponent={isPlayer}  />
       <button className="showMyHand" onClick={()=> toggleMyHand()}> You </button>
-      <br/>
+      <br/> <br/> <br/>
       <button className="changeHand" onClick={()=> changeCards()}> Change em </button>
-      <br/> <br/> <br/> <br/>
+      <h3> Press to Change Selected Cards </h3>
+      <br/> <br/> <br/> <br/> <br/>
     </div>
     <div className="button"  >
       <button className="evaluate" onClick={() => toggleEval()} > evaluate </button>
-      <br/>
+      <br/> <br/> <br/>
       <button className="deal" onClick={() => dealHands()} > deal again </button>
       <Eval evalmenu={evalmenu} youResult={final} oppResult={final2} winner={thiswinner}  />
     </div>
