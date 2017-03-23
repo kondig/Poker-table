@@ -7,8 +7,12 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { tableMaker, initialState } from './components/reducer';
 
-const store = createStore(tableMaker, initialState);
+let devtools =  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const store = createStore(tableMaker, initialState, devtools);
+
+console.log('Initial state: ')
 console.log(store.getState());
+console.log('-----------');
 
 ReactDOM.render(
     <Provider store={store}>

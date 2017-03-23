@@ -7,18 +7,9 @@ const initialState = {
   evalmenu: false,
   isOpponent: true,
   isPlayer: false,
-  cardsToSwap: [],
   deckId: myDeck
 }
-function contains(a, obj) {
-    var i = a.length;
-    while (i--) {
-       if (a[i] === obj) {
-           return true;
-       }
-    }
-    return false;
-}
+
 function compare(a,b) {
   return a.weight-b.weight;
 }
@@ -55,11 +46,6 @@ const tableMaker = (state = {}, action) => {
           isOpponent: !state.isOpponent
         }
     case 'SELECT':
-      let mycard = {
-        rank: action.rank,
-        suit: action.suit,
-        weight: action.weight
-      }
       console.log(state);
       console.log(state.cardsToSwap);
       return {
@@ -67,15 +53,7 @@ const tableMaker = (state = {}, action) => {
         you: state.you.map((card) => {
             if (card.rank !== action.rank || card.suit !== action.suit) {
               return card;
-             }
-              else {
-              if (!contains(state.cardsToSwap, mycard)) {
-                state.cardsToSwap.push(card);
-                return {
-                  ...card,
-                  selected: !card.selected,
-                }
-              }
+             } else {
               return {
                 ...card,
                 selected: !card.selected,
@@ -102,7 +80,6 @@ const tableMaker = (state = {}, action) => {
       return {
         ...state,
         you: sortedTrick,
-        // cardsToSwap: state.cardsToSwap
         }
 	default:
 	   return state;

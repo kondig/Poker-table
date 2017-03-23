@@ -22,13 +22,7 @@ class Hand extends Component {
     )
   }
 }
-const mapStateToProps = (state) => {
-  return {
-    cardsToSwap: state.cardsToSwap
-  }
-}
 
-
-Hand = connect (mapStateToProps,null)(Hand);
+Hand = connect ()(Hand);
 
 export { Hand }

@@ -23,14 +23,13 @@ const SUITS = {
     color: 'red',},
   }
 
-
-
 var Card = function (rank, suit, weight) {
     this.rank = rank;
     this.suit = suit;
     this.weight = weight;
     this.selected = false;
  };
+
 function createDeck() {
     const rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
     const weight = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
@@ -42,7 +41,6 @@ function createDeck() {
       }
     }
  }
-
 
 function drawCard () {
     if (this.deck.length > 0) {
@@ -56,6 +54,7 @@ function drawCard () {
       return null;
     }
  }
+ 
 function buildHand() {
   var hand = [];
   let card1 = this.deck[Math.floor(Math.random()*this.deck.length)];

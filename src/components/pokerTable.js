@@ -20,20 +20,20 @@ let PokerTable = (props) => {
     <div className="Table">
       <p> Opponent </p>
       <Hand trick={trick2} isOpponent={isOpponent}  />
-      <button className="showOppHand" onClick={()=> toggleHand()}> Opp </button>
+      <button className="showOppHand" onClick={()=> toggleHand()}>  </button>
       <br/> <br/> <br/> <br/> <br/> <br/>
       <p> You </p>
       <Hand trick={trick} isOpponent={isPlayer}  />
-      <button className="showMyHand" onClick={()=> toggleMyHand()}> You </button>
+      <button className="showMyHand" onClick={()=> toggleMyHand()}>  </button>
       <br/> <br/> <br/>
-      <button className="changeHand" onClick={()=> changeCards()}> Change em </button>
+      <button className="changeHand" onClick={()=> changeCards()}>  </button>
       <h3> Press to Change Selected Cards </h3>
       <br/> <br/> <br/> <br/> <br/>
     </div>
     <div className="button"  >
-      <button className="evaluate" onClick={() => toggleEval()} > evaluate </button>
+      <button className="evaluate" onClick={() => toggleEval()} >  </button>
       <br/> <br/> <br/>
-      <button className="deal" onClick={() => dealHands()} > deal again </button>
+      <button className="deal" onClick={() => dealHands()} >  </button>
       <Eval evalmenu={evalmenu} youResult={final} oppResult={final2} winner={thiswinner}  />
     </div>
     </div>
@@ -68,4 +68,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 PokerTable = connect(mapStateToProps,mapDispatchToProps)(PokerTable);
-export { PokerTable };
+export { PokerTable }
